@@ -1,22 +1,41 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { SplashScreen, Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import { NativeWindStyleSheet } from "nativewind";
+
+SplashScreen.preventAutoHideAsync()
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const RootLayout = () => {
+  const [fontsLoaded, error] = useFonts({
+    // to load from read me
+  })
+
+  useEffect(() => {
+    if(error) throw error
+
+    if(fontsLoaded) SplashScreen.hideAsync()
+  }, [fontsLoaded, error])
+
+  if(!fontsLoaded && !error) return null
   return (
-    <View style={styles.container}>
-      <Text>RootLayout</Text>
-    </View>
-  )
-}
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
 
-export default RootLayout
-
+export default RootLayout;
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
