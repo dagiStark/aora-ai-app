@@ -24,7 +24,6 @@ const SignIn = () => {
             resizeMode="contain"
             className="w-[115px] h-[35px]"
           />
-
           <Text className="text-2xl text-white text-semibold mt-10 font-psemibold">
             Log in to Aora
           </Text>
@@ -34,7 +33,6 @@ const SignIn = () => {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
           />
-
           <CustomButton
             title="Sign In"
             handlePress={submit}
